@@ -1,0 +1,158 @@
+[debug] [2018-10-09T13:07:22.586Z] ----------------------------------------------------------------------
+[debug] [2018-10-09T13:07:22.588Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] [2018-10-09T13:07:22.588Z] CLI Version:   4.2.1
+[debug] [2018-10-09T13:07:22.588Z] Platform:      linux
+[debug] [2018-10-09T13:07:22.588Z] Node Version:  v10.8.0
+[debug] [2018-10-09T13:07:22.593Z] Time:          Tue Oct 09 2018 20:07:22 GMT+0700 (Indochina Time)
+[debug] [2018-10-09T13:07:22.593Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-09T13:07:22.602Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-09T13:07:22.602Z] > authorizing via signed-in user
+[debug] [2018-10-09T13:07:22.604Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/quer-mobi  
+ 
+[debug] [2018-10-09T13:07:24.332Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'quer-mobi'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] ✔  functions: Finished running predeploy script.
+[debug] [2018-10-09T13:07:29.009Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "engines": {
+    "node": "8"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "Faker": "^0.7.2",
+    "bluebird": "^3.5.2",
+    "cors": "^2.8.4",
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.0.3",
+    "firebase-tools": "4.0.0",
+    "ioredis": "^4.0.0",
+    "jsonwebtoken": "^8.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2018-10-09T13:07:29.010Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/quer-mobi?view=CONSUMER_VIEW  
+ 
+[debug] [2018-10-09T13:07:29.011Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/quer-mobi?view=CONSUMER_VIEW  
+ 
+[debug] [2018-10-09T13:07:31.397Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:31.496Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2018-10-09T13:07:31.497Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/quer-mobi  
+ 
+[debug] [2018-10-09T13:07:33.135Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:33.136Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1016040513188:getServerAppConfig  
+ 
+[debug] [2018-10-09T13:07:33.621Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2018-10-09T13:07:33.629Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/quer-mobi/configs  
+ 
+[debug] [2018-10-09T13:07:34.235Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (144.43 KB) for uploading
+[debug] [2018-10-09T13:07:34.769Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2018-10-09T13:07:35.765Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:35.765Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-c13902f1-4a7f-4684-8e5b-c580eab126fd/6139aeb0-cb9c-4c4e-8f74-40fb5ba2ee49.zip?GoogleAccessId=service-1016040513188@gcf-admin-robot.iam.gserviceaccount.com&Expires=1539092255&Signature=WI7Ivtiw4zjjZ%2FzujurRZ8WTu3LCRrjEGgBQDIhq0CS8FlqI6LaTpkRjGIoy2L6NhJ%2F%2B%2F6f7gQo6XerIQ5XwU4HTTRiqe91ca0ckX9Q1kkaNAFjWXjTJ4OnOvvrJdRA2rW7eaBM3rct3LmU8ZFffPqFAaIk0rDBv4pPNT%2BbKMzJac3Z9hiDx6ntH9%2BQyMBK3cxtkZ5VfAbnrmgCXNB4eezm7eeYwNxMb7VYo74nb1wqbB7FpYnCf%2FzOJ3Uh8XsPnyqM1r%2F%2Fqnp213QCIuz3YoslhlSm1DFgpdj5oLdsqu%2Fif1Uadf90GS16d83xUOWA14PFGkd%2BAka7hL9ZQ0zR4OA%3D%3D  
+
+[debug] [2018-10-09T13:07:38.547Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[debug] [2018-10-09T13:07:38.549Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/-/functions  
+ 
+[debug] [2018-10-09T13:07:39.567Z] <<< HTTP RESPONSE 200
+[info] i  functions: creating Node.js 8 function GetAuthToken(us-central1)...
+[debug] [2018-10-09T13:07:39.570Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function CheckInQueue(us-central1)...
+[debug] [2018-10-09T13:07:39.571Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function CheckOutQueue(us-central1)...
+[debug] [2018-10-09T13:07:39.571Z] Trigger is:  {"httpsTrigger":{}}
+[info] i  functions: updating Node.js 8 function AddMessage(us-central1)...
+[debug] [2018-10-09T13:07:39.572Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2018-10-09T13:07:39.573Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/us-central1/functions  
+
+[debug] [2018-10-09T13:07:39.574Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/us-central1/functions/CheckInQueue 
+query params: {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2018-10-09T13:07:39.576Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/us-central1/functions/CheckOutQueue 
+query params: {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2018-10-09T13:07:39.577Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/us-central1/functions/AddMessage 
+query params: {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2018-10-09T13:07:40.444Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:40.446Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:40.575Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:40.576Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:40.578Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/quer-mobi/locations/-/functions  
+ 
+[debug] [2018-10-09T13:07:41.614Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:41.617Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0dldEF1dGhUb2tlbi9sRjJYZU9VQnZ6aw  
+ 
+[debug] [2018-10-09T13:07:41.618Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrSW5RdWV1ZS8xeHRHYmVVR2FRRQ  
+ 
+[debug] [2018-10-09T13:07:41.618Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrT3V0UXVldWUvQVIycldBOEcyT1k  
+ 
+[debug] [2018-10-09T13:07:41.619Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0FkZE1lc3NhZ2UvR1ZYQWJtMmM5WmM  
+ 
+[debug] [2018-10-09T13:07:42.534Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:42.536Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:42.536Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:42.536Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:44.536Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0dldEF1dGhUb2tlbi9sRjJYZU9VQnZ6aw  
+ 
+[debug] [2018-10-09T13:07:44.538Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrT3V0UXVldWUvQVIycldBOEcyT1k  
+ 
+[debug] [2018-10-09T13:07:44.538Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrSW5RdWV1ZS8xeHRHYmVVR2FRRQ  
+ 
+[debug] [2018-10-09T13:07:44.538Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0FkZE1lc3NhZ2UvR1ZYQWJtMmM5WmM  
+ 
+[debug] [2018-10-09T13:07:45.336Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:45.337Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:45.337Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:45.338Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:47.336Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0FkZE1lc3NhZ2UvR1ZYQWJtMmM5WmM  
+ 
+[debug] [2018-10-09T13:07:47.338Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0dldEF1dGhUb2tlbi9sRjJYZU9VQnZ6aw  
+ 
+[debug] [2018-10-09T13:07:47.338Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrSW5RdWV1ZS8xeHRHYmVVR2FRRQ  
+ 
+[debug] [2018-10-09T13:07:47.340Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrT3V0UXVldWUvQVIycldBOEcyT1k  
+ 
+[debug] [2018-10-09T13:07:47.774Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:48.284Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:48.284Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:48.285Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:49.776Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0FkZE1lc3NhZ2UvR1ZYQWJtMmM5WmM  
+ 
+[debug] [2018-10-09T13:07:50.284Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrT3V0UXVldWUvQVIycldBOEcyT1k  
+ 
+[debug] [2018-10-09T13:07:50.285Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0dldEF1dGhUb2tlbi9sRjJYZU9VQnZ6aw  
+ 
+[debug] [2018-10-09T13:07:50.286Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrSW5RdWV1ZS8xeHRHYmVVR2FRRQ  
+ 
+[debug] [2018-10-09T13:07:50.508Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:51.006Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:51.021Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:51.572Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-09T13:07:52.509Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0FkZE1lc3NhZ2UvR1ZYQWJtMmM5WmM  
+ 
+[debug] [2018-10-09T13:07:53.008Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0NoZWNrT3V0UXVldWUvQVIycldBOEcyT1k  
+ 
+[debug] [2018-10-09T13:07:53.021Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/cXVlci1tb2JpL3VzLWNlbnRyYWwxL0dldEF1dGhUb2tlbi9sRjJYZU9VQnZ6aw  
+ 
