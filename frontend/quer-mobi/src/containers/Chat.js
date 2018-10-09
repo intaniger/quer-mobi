@@ -6,10 +6,9 @@ export default ({open, msgList, onClose}) => (
   <Modal basic size='small' open={open} onClose={onClose}>
     <Header icon='chat' content='Chat with quer' />
     <Modal.Content>
-      <MessageList
-        lockable
-        toBottomHeight="100%"
-        dataSource={msgList} />
+      <div style={{height:"60vh", overflowY:"auto"}}>
+        <MessageList dataSource={msgList} />
+      </div>
     </Modal.Content>
     <Modal.Actions>
       <Input

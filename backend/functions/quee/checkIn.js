@@ -42,7 +42,7 @@ exports.CheckInQueue = functions.https.onRequest(async(request, response) => {
       queeID = randomAlphanumberic(5,5)
       console.log(queeID)
     }
-    response.cookie("token", jwt.sign({queeID},config.jwtSecret,{issuer:"quer-mobi"}), {httpOnly:true})
+    response.cookie("token", jwt.sign({queeID},config.jwtSecret,{issuer:"quer-mobi"}), {httpOnly:true, expires: new Date(Date.now() + 1000 * 60 * 60 * 24)})
   }else{
     jwt.verify(userCookie.token, config.jwtSecret, (err, decode)=>{
       if(err){

@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import axios from "axios";
-import { Modal, Loader, Grid, Button, Icon } from "semantic-ui-react";
+import { Grid, Button, Icon } from "semantic-ui-react";
 import firebase from "firebase"
 import { MessageBox } from 'react-chat-elements'
 import Highcharts from "react-highcharts";
 import moment from "moment"
 import { Link } from 'react-static'
-
-import styled from 'styled-components';
 
 import 'react-chat-elements/dist/main.css';
 
@@ -20,10 +18,6 @@ import ChatPopup from "../containers/Chat";
 firebase.initializeApp({
   databaseURL:"https://quer-mobi.firebaseio.com/"
 })
-
-const MessageBoxes = styled(MessageBox)`
-  width: 100%!important;
-`
 
 //
 class QueePage extends Component {
@@ -107,6 +101,8 @@ class QueePage extends Component {
       })
     })
     db.ref(`${querID}/queue`).on('value', (snapshot)=>{
+      // @todo #3:2hr ทำหน้าแสดง quee auth token
+      // @todo #4:2hr ทำหน้า post-queue
       const val = snapshot.val()
       if(val == null){
         this.reportError("Room not found.")
@@ -134,11 +130,11 @@ class QueePage extends Component {
         return
       const newMsg = snapshot.val()
       const newMessage = {
-        position:'right',
-        type: 'text',
-        text:newMsg.message,
-        title:newMsg.sender,
-        date:new Date(newMsg.timestamp)
+        position:(newMsg.sender==="quee")?'right':'left',
+          type: 'text',
+          text:<p style={{color:"black"}}>{newMsg.message}</p>,
+          title:newMsg.sender,
+          date:new Date(newMsg.timestamp)
       }
       const newMsgCount = this.state.qChat.new + 1
       this.setState({
