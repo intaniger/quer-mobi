@@ -34,8 +34,9 @@ class QueePage extends Component {
       messages:[],
       msgID:[]
     },
-    queeID:"",
-    qChatPopup:false
+    currentOrder:0,
+    qChatPopup:false,
+    authToken:""
   }
   reportError = (error)  => {
     console.log("Error occured : ", error)
@@ -83,7 +84,7 @@ class QueePage extends Component {
       const messages = []
       const msgID = []
       Object.keys(oldMsg).forEach(key => {
-        newMsgCount += 1
+        newMsgCount += (oldMsg[key].sender==="quee")?0:1
         messages.push({
           position:(oldMsg[key].sender==="quee")?'right':'left',
           type: 'text',
@@ -101,7 +102,6 @@ class QueePage extends Component {
       })
     })
     db.ref(`${querID}/queue`).on('value', (snapshot)=>{
-      // @todo #3:2hr ทำหน้าแสดง quee auth token
       // @todo #4:2hr ทำหน้า post-queue
       const val = snapshot.val()
       if(val == null){
@@ -113,16 +113,24 @@ class QueePage extends Component {
       Object.keys(val).forEach(key => {
         if(val[key].serviceTime > 0)
           timeHist.push(val[key].serviceTime)
-          else
+        else
           order.push(val[key].queeID)
-        })
-        this.setState({
+      })
+      if (order.indexOf(queeID) === 0) {
+        axios.get(`${APIhost}/GetAuthToken`,{params:{querID}, withCredentials:true}).then((response)=>
+          this.setState({
+            authToken:response.data.authToken
+          })
+        )
+      }
+      this.setState({
         qInfo:{
           ...this.state.qInfo,
           order,
           timeHist,
         },
-        status:"success"
+        status:"success",
+        currentOrder:order.indexOf(queeID)+1
       })
     })
     db.ref(`${querID}/chat/${queeID}`).on('child_added', (snapshot)=>{
@@ -136,7 +144,7 @@ class QueePage extends Component {
           title:newMsg.sender,
           date:new Date(newMsg.timestamp)
       }
-      const newMsgCount = this.state.qChat.new + 1
+      const newMsgCount = (newMsg.sender==="quee")?this.state.qChat.new:this.state.qChat.new + 1
       this.setState({
         qChat:{
           new: newMsgCount,
@@ -145,6 +153,32 @@ class QueePage extends Component {
         }
       })
     })
+  }
+  addChatMessage = async (message, callback, failedCallback) => {
+      try {
+        this.setState({
+          status:"init"
+        })
+        const querID = this.props.match.params.id
+        const response =  await axios.post(
+          `${APIhost}/AddMessage`,
+          {
+            querID,
+            message
+          },
+          {withCredentials:true})
+        if(!response.data.success)
+          throw response.data.msg
+        this.setState({
+          status:"success"
+        })
+        callback()
+      } catch (error) {
+        this.setState({
+          status:"success"
+        })
+        failedCallback(error)
+      }
   }
   componentWillMount = () => {
     const querID = this.props.match.params.id
@@ -164,7 +198,17 @@ class QueePage extends Component {
         onConfirm={()=>this.checkOutQueue(querID)}
         onCancel={()=>this.setState({status:"success"})}
       />
-      <ChatPopup open={this.state.qChatPopup} msgList={this.state.qChat.messages} onClose={()=>this.setState({qChatPopup:false})}/>
+      <ChatPopup
+        open={this.state.qChatPopup}
+        msgList={this.state.qChat.messages}
+        onClose={()=>this.setState({
+          qChatPopup:false,
+          qChat:{
+            ...this.state.qChat,
+            new:0
+          },
+        })}
+        onSend={this.addChatMessage}/>
       <Grid centered>
         <Grid.Row>
           <Grid.Column computer={12} mobile={12}>
@@ -189,22 +233,29 @@ class QueePage extends Component {
                   <Grid centered style={{marginTop:20}}>
                     <Grid.Row>
                       <Grid.Column width={3}>
-                        <QueueVisualize percentagePosition={(this.state.qInfo.order.indexOf(this.state.queeID)+1)/this.state.qInfo.order.length}/>
+                        <QueueVisualize percentagePosition={(this.state.currentOrder)/this.state.qInfo.order.length}/>
                       </Grid.Column>
                       <Grid.Column width={13}>
                         <Grid.Row>
                           <MessageBox titleColor="black" text={<div style={{width:"50vw", maxHeight:"50vh"}}>
                             <h1>
-                              You are #{this.state.qInfo.order.indexOf(this.state.queeID)+1}
+                              You are #{this.state.currentOrder}
                             </h1>
-                            <strong>estimated time: {moment
-                              .utc()
-                              .startOf('day')
-                              .add(this.state.qInfo.timeHist.reduce(
-                                (acc, val, index)=>
-                                  (acc*index+val)/(index+1)
-                                ,0)*this.state.qInfo.order.indexOf(this.state.queeID),'minutes').format('hh:mm')} hours</strong>
-                            <Highcharts config={TimeHistChartConfig(this.state.qInfo.timeHist)}/>
+                            {
+                              this.state.currentOrder === 1?
+                              <div>
+                                <h4 style={{textAlign:"center"}}>Please show this token to quer</h4>
+                                <h1 style={{textAlign:"center"}}>{this.state.authToken}</h1>
+                              </div>:
+                              <div>
+                                <strong>estimated time: {moment
+                                  .utc(this.state.qInfo.timeHist.reduce(
+                                    (acc, val, index)=>
+                                      (acc*index+val)/(index+1)
+                                    ,0)*(this.state.currentOrder - 1)*60000).format('HH:mm')} hours</strong>
+                                <Highcharts config={TimeHistChartConfig(this.state.qInfo.timeHist)}/>
+                              </div>
+                            }
                             </div>} dateString=" "/>
                         </Grid.Row>
                         <Grid centered stretched>
